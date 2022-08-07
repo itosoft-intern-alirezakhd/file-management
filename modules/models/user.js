@@ -8,18 +8,19 @@ const UserSchema = new Schema({
   firstName: { type: String, required: true },
   lastName: { type: String, required: true },
   email: { type: String, default: null },
-  mobile: { type: String, default: null },
-  password: { type: String, default: null },
-  type: { type: String, default: '' },
+  username : {type : String , required : true},
+  mobile: { type: String, required : true },
+  password: { type: String, required : true },
+  type: { type: String, default: 'user' },
 })
 //
 UserSchema.plugin(timestamps)
 UserSchema.plugin(aggregatePaginate)
 UserSchema.pre('save', function (next) {
   bcrypt.hash(this.password, 10, (err, hash) => {
-    this.password = hash
-    next()
+    this.password = hash;
+    next();
   })
 })
 //
-module.exports = mongoose.model('User', UserSchema)
+module.exports = mongoose.model('User', UserSchema);
