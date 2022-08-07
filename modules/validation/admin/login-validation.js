@@ -1,11 +1,8 @@
-import {
-    body
-} from 'express-validator'
+const {body} = require('express-validator/check')
 
-
-export default [
+module.exports = [
     body('username', 'username should not be empty and max length is 10 characters')
-    .notEmpty()
+    .not().isEmpty()
     .isLength({
         max : 10
     }),
@@ -14,5 +11,5 @@ export default [
         min: 5,
         max: 10
     })
-    .notEmpty(),
+    .not().isEmpty(),
 ]

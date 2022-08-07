@@ -1,4 +1,4 @@
-const config = require("../../modules/config");
+const config = require("../../config");
 
 module.exports.index = async (req, model, queryData, aggregateData, sort) => {
   try {

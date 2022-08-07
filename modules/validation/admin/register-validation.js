@@ -1,25 +1,23 @@
-import {
-    body
-} from 'express-validator'
+const {body} = require('express-validator/check')
 
-export default [
+module.exports =  [
     body('email', 'Email length should not be empty or incorrect format')
-    .isEmail().
-    notEmpty(),
+    .isEmail()
+    .not().isEmpty(),
     body('firstName', 'Name length should not be empty and max length is 10 characters')
-    .notEmpty()
+    .not().isEmpty()
     .isLength({
         max : 10
     })
     ,
     body('lastName', 'Name length should not be empty and max length is 10 characters')
-    .notEmpty()
+    .not().isEmpty()
     .isLength({
         max : 10
     })
     ,
     body('username', 'username should not be empty and max length is 10 characters')
-    .notEmpty()
+    .not().isEmpty()
     .isLength({
         max : 10
     }),
@@ -28,15 +26,13 @@ export default [
         min: 10,
         max: 10
     })
-    .notEmpty(),
+    .not().isEmpty(),
     body('password', 'Password length should be 5 to 10 characters  and not empty')
     .isLength({
         min: 5,
         max: 10
     })
-    .notEmpty(),
+    .not().isEmpty(),
     body('type', 'type should not be empty')
-    .notEmpty()
-
-
+    .not().isEmpty()
 ]

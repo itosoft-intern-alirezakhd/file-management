@@ -64,7 +64,6 @@ const limiter = rateLimit({
 app.use("/public", express.static("public"));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json({ type: "application/json" }));
-
 // if (dev === "false") {
 //   const { sendLog } = require("./modules/helpers/myLogger");
 //   app.use(sendLog);

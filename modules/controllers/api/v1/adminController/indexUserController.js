@@ -1,5 +1,5 @@
 
-const config = require('../../../../config')
+const config = require('../../../../../config')
 const Controller = require(`${config.path.controller}/controller`)
 
 const { response } = require(`${config.path.helper}/response`)
