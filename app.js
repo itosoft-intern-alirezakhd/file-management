@@ -74,13 +74,12 @@ app.use(helmet());
 app.use(hpp());
 app.use(mongoSanitize());
 app.use(limiter);
-console.log("test");
 
 //api-v1
 const publicApiV1Router = require("./modules/routes/api/public/api-v1");
 const superAdminApiV1Router = require("./modules/routes/api/admin/api-v1");
 app.use("/api/v1", publicApiV1Router);
-app.use("/api/v1/superAdmin", superAdminApiV1Router);
+app.use("/api/v1/admin", superAdminApiV1Router);
 
 
 app.use(function (err, req, res, next) {
