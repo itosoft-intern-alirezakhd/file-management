@@ -1,26 +1,32 @@
 const InitializeController = require("./initializeController");
 const bcrypt = require("bcrypt");
-
-module.exports = new (class loginController extends InitializeController {
+const {
+  validationResult
+} = require('express-validator/check');
+module.exports = new(class loginController extends InitializeController {
   async login(req, res) {
-    req.checkBody("email", "وارد کردن فیلد ایمیل الزامیست").notEmpty();
-    req.checkBody("password", "وارد کردن فیلد پسورد الزامیست").notEmpty();
-    if (this.showValidationErrors(req, res)) return "";
-    //
     try {
-      const superAdmin = await this.model.User.findOne({ email: req.body.email, type: "superAdmin" }).exec();
-      if (!superAdmin) return this.abort(res, 401, logcode);
-      const match = await bcrypt.compare(req.body.password, superAdmin.password);
-      if (!match) return this.abort(res, 401, logcode);
+      const {username , password } = req.body;
+      let errors = validationResult(req);
+      if (!errors.isEmpty()) {
+        return this.showValidationErrors(res, errors.array())
+      }
+      const admin = await this.model.User.findOne({
+        username,
+        type : {$in : ["superAdmin" , "admin" ]}
+      });
+      if (!admin) return this.abort(res, 401, null , "admin does not exist");
+      const match = await bcrypt.compare(password, admin.password);
+      if (!match) return this.abort(res, 401, null , 'password is wrong');
       const Transform = await this.helper.transform(
-        superAdmin,
+        admin,
         this.helper.itemTransform,
         false,
-        "superAdmin",
+        admin.type,
         req.connection.remoteAddress,
         req.get("User-Agent")
       );
-      return this.helper.response(res, null, logcode, 200, Transform);
+      return this.helper.response(res, "login successfully", null, 200, Transform);
     } catch (err) {
       console.log(err);
       return this.abort(res, 500, logcode);
