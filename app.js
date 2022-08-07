@@ -10,31 +10,32 @@ const hpp = require("hpp");
 const mongoSanitize = require("express-mongo-sanitize");
 require("dotenv").config();
 const port = process.env.APP_PORT;
-const mongodbUrl = process.env.MONGODB_URL;
+const mongodbUrl = process.env.MONGODB_URL.toString();
+
 // const cronjobs = require('');
 const dev = process.env.DEV;
 const releasesV = process.env.RELEASES_V;
 //Locallogger
-if (dev === "false") {
-  const datetime = new Date();
-  const fs = require("fs");
-  const util = require("util");
-  if (!fs.existsSync("./debug")) {
-    fs.mkdirSync("./debug");
-  }
-  const log_file = fs.createWriteStream(__dirname + `/debug/${datetime.toISOString().slice(0, 10)}.log`, {
-    flags: "w",
-  });
-  const log_stdout = process.stdout;
-  console.log = function (d) {
-    //
-    log_file.write(`\n----------${datetime}\n` + util.format(d) + "\n----------");
-    log_file.write(`\n----------${datetime}\n` + util.format(d) + "\n----------");
-  };
-}
+// if (dev === "false") {
+//   const datetime = new Date();
+//   const fs = require("fs");
+//   const util = require("util");
+//   if (!fs.existsSync("./debug")) {
+//     fs.mkdirSync("./debug");
+//   }
+//   const log_file = fs.createWriteStream(__dirname + `/debug/${datetime.toISOString().slice(0, 10)}.log`, {
+//     flags: "w",
+//   });
+//   const log_stdout = process.stdout;
+//   console.log = function (d) {
+//     //
+//     log_file.write(`\n----------${datetime}\n` + util.format(d) + "\n----------");
+//     log_file.write(`\n----------${datetime}\n` + util.format(d) + "\n----------");
+//   };
+// }
 //Locallogger
 
-global.logcode = "0";
+// global.logcode = "0";
 // Connect to DB
 mongoose.connect(mongodbUrl, {
   useNewUrlParser: true,
@@ -42,7 +43,12 @@ mongoose.connect(mongodbUrl, {
   useFindAndModify: false,
   useCreateIndex: true,
 });
+
 mongoose.Promise = global.Promise;
+const db = mongoose.connection;
+db.on('error', (error) => console.error(error));
+db.once('open', () => console.log("Connected to Database"));
+
 const corsOptions = {
   origin: "*",
   optionsSuccessStatus: 200,
@@ -54,34 +60,30 @@ const limiter = rateLimit({
   max: 100,
 });
 
-app.locals.logcode = "0";
+// app.locals.logcode = "0";
 app.use("/public", express.static("public"));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json({ type: "application/json" }));
 
-if (dev === "false") {
-  const { sendLog } = require("./modules/helpers/myLogger");
-  app.use(sendLog);
-}
+// if (dev === "false") {
+//   const { sendLog } = require("./modules/helpers/myLogger");
+//   app.use(sendLog);
+// }
 
 app.use(expressValidator());
 app.use(helmet());
 app.use(hpp());
 app.use(mongoSanitize());
 app.use(limiter);
+console.log("test");
 
 //api-v1
 const publicApiV1Router = require("./modules/routes/api/public/api-v1");
-const superAdminApiV1Router = require("./modules/routes/api/superAdmin/api-v1");
+const superAdminApiV1Router = require("./modules/routes/api/admin/api-v1");
 app.use("/api/v1", publicApiV1Router);
 app.use("/api/v1/superAdmin", superAdminApiV1Router);
 
 
-app.listen(port, () => {
-  console.log(`Server is running at Port ${port}`);
-  //cronjobs
-  // cronjobs();
-});
 app.use(function (err, req, res, next) {
   console.error(err.stack);
   res.status(500).send({
@@ -95,4 +97,11 @@ app.use(function (err, req, res, next) {
     v: releasesV,
   });
   next();
+});
+
+
+app.listen(port, () => {
+  console.log(`Server is running at Port ${port}`);
+  //cronjobs
+  // cronjobs();
 });

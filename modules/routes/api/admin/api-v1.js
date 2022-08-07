@@ -2,8 +2,8 @@ const config = require("../../../config");
 const express = require("express");
 const router = express.Router();
 // middleware
-const apiSuperAdmin = require(`${config.path.middleware}/superAdmin/apiSuperAdmin`);
-const apiSuperAdminRegister = require(`${config.path.middleware}/superAdmin/apiSuperAdminRegister`);
+const apiSuperAdmin = require(`${config.path.middleware}/admin/apiAdmin`);
+const apiSuperAdminRegister = require(`${config.path.middleware}/admin/apiSuperAdminRegister`);
 //  Controllers
 const { superAdmin: superAdminController } = config.path.controllersApi.v1;
 /// Controller

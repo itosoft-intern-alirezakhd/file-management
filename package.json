@@ -1,11 +1,10 @@
 {
   "name": "y",
   "version": "1.0.0",
-  "description": "",
+  "description": "https://documenter.getpostman.com/view/11932305/UVRHj4D3",
   "main": "app.js",
   "scripts": {
-    "dev": "npm i && nodemon app.js",
-    "start": "node app.js"
+    "devStart": "nodemon app.js"
   },
   "author": "",
   "license": "ISC",
@@ -30,6 +29,14 @@
     "uuid": "^8.3.2"
   },
   "devDependencies": {
-    "nodemon": "^2.0.4"
-  }
+    "nodemon": "^2.0.19"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/itosoft-intern-alirezakhd/file-management.git"
+  },
+  "bugs": {
+    "url": "https://github.com/itosoft-intern-alirezakhd/file-management/issues"
+  },
+  "homepage": "https://github.com/itosoft-intern-alirezakhd/file-management#readme"
 }
