@@ -3,7 +3,6 @@ const {
   validationResult
 } = require('express-validator/check');
 const config = require('../../../../../../config');
-const checkValidationErr = require(`${config.path.helper}/checkValidationErr`);
 
 module.exports = new(class registerController extends InitializeController {
   async register(req, res) {

@@ -12,6 +12,7 @@ const tagSingleController = require(`${publicController}/tag/singleController`);
 const postIndexController = require(`${publicController}/post/indexController`);
 const postSingleController = require(`${publicController}/post/singleController`);
 ///Router
+
 // tag
 const tagRouter = express.Router();
 tagRouter.get("/", tagIndexController.index.bind(tagIndexController));
