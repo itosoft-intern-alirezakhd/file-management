@@ -18,8 +18,8 @@ module.exports = new(class singleController extends InitializeController {
             const response_key = req.body["g-recaptcha-response"];
             console.log(response_key);
             let response = await this.helper.recaptcha(response_key , req.connection.remoteAddress)    
-            let data = await response.json()
-            if(!data.success ){
+            console.log(response);
+            if(!response.data.success ){
                 return this.abort(res , null , 429 , {
                     success: false ,
                     message : "failed captcha verification"
