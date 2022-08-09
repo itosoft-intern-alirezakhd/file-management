@@ -6,7 +6,7 @@ const apiAdmin = require(`${config.path.middleware}/admin/apiAdmin`);
 const apiSuperAdminRegister = require(`${config.path.middleware}/admin/apiSuperAdminRegister`);
 
 //validation 
-const registerAdminValidation = require(`${config.path.validation}/admin/register-validation`)
+const registerAdminValidation = require(`${config.path.validation}/admin/auth/register-validation`)
 
 
 //  Controllers

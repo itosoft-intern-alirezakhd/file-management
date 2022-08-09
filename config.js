@@ -4,7 +4,7 @@ module.exports = {
   path: {
     controllersApi: {
       v1: {
-        public: path.resolve("./modules/controllers/api/v1/publicController"),
+        user: path.resolve("./modules/controllers/api/v1/userController"),
         admin: path.resolve("./modules/controllers/api/v1/adminController"),
       },
     },

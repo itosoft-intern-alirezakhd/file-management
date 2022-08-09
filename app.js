@@ -7,6 +7,7 @@ const rateLimit = require("express-rate-limit");
 const cors = require("cors");
 const helmet = require("helmet");
 const hpp = require("hpp");
+const {farazSMS} = require('@aspianet/faraz-sms');
 const mongoSanitize = require("express-mongo-sanitize");
 require("dotenv").config();
 const port = process.env.APP_PORT;
@@ -76,9 +77,9 @@ app.use(mongoSanitize());
 app.use(limiter);
 
 //api-v1
-const publicApiV1Router = require("./modules/routes/api/public/api-v1");
+const userApiV1Router = require("./modules/routes/api/user/api-v1");
 const superAdminApiV1Router = require("./modules/routes/api/admin/api-v1");
-app.use("/api/v1", publicApiV1Router);
+app.use("/api/v1/user", userApiV1Router);
 app.use("/api/v1/admin", superAdminApiV1Router);
 
 
@@ -88,7 +89,7 @@ app.use(function (err, req, res, next) {
     message: {
       message: "!خطای سرور",
       field: null,
-      logcode,
+      logcode : null,
     },
     status: 500,
     success: false,

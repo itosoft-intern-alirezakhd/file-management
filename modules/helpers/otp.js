@@ -1,4 +1,4 @@
-const Otp = require('../models/otp-model.js')
+const Otp = require('../models/otp')
 const otpGenerator = require('otp-generator')
 const bcrypt = require('bcrypt')
 

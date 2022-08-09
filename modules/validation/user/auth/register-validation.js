@@ -21,10 +21,10 @@ module.exports =  [
     .isLength({
         max : 10
     }),
-    body('mobile', 'Mobile number should contains 10 digits and not empty')
+    body('mobile', 'Mobile number should contains 11 digits and not empty')
     .isLength({
-        min: 10,
-        max: 10
+        min: 11,
+        max: 11
     })
     .not().isEmpty(),
     body('password', 'Password length should be 5 to 10 characters  and not empty')
@@ -33,6 +33,4 @@ module.exports =  [
         max: 10
     })
     .not().isEmpty(),
-    body('type', 'type should not be empty')
-    .not().isEmpty()
 ]
