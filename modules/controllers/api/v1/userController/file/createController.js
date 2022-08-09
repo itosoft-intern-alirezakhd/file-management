@@ -39,7 +39,7 @@ module.exports = new(class CreateController extends initializeController {
             //saving file
             await file.save();
             //create access link
-            let link = process.env.ENVDOMAIN + "/" + slug;
+            let link = process.env.DOMAIN + "/" + slug;
             console.log(link);
             return this.helper.response(res, "create file successfully", null, 200, {
                 link
@@ -48,8 +48,6 @@ module.exports = new(class CreateController extends initializeController {
             console.log(err.message);
             return this.abort(res, 500, null);
         }
-
-
     }
 
 })();
