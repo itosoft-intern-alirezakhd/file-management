@@ -26,11 +26,23 @@ module.exports = new (class indexController extends InitializeController {
             "user.__v": 0,
             "user.updatedAt": 0,
             "user.createdAt": 0,
-            "text" : 0,
-            "password" : 0,
+            "password" : 0
           },
         },
       ];
+      //captcha
+    //   const response_key = req.body["g-recaptcha-response"];
+    //   if(!response_key) return this.abort(res , 200 , null , "response key must be entered");
+    //   let response = await this.helper.recaptcha(response_key , req.connection.remoteAddress)    
+    //   console.log(response);
+    //   if(!response.data.success ){
+    //       return this.abort(res , null , 429 , {
+    //           success: false ,
+    //           message : "failed captcha verification"
+    //       })
+    //   }
+
+
       const result = await this.helper.index(req, "file", queryData, aggregateData, sort);
       console.log(result);
       if (!result) return this.abort(res, 500, null);

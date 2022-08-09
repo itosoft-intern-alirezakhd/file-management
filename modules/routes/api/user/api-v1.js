@@ -27,7 +27,7 @@ const registerVerifyController = require('../../../controllers/api/v1/userContro
 const loginVerifyController = require('../../../controllers/api/v1/userController/auth/loginVerifyOtpController');
 //file 
 const createfileController = require('../../../controllers/api/v1/userController/file/createController');
-
+const indexFileController = require('../../../controllers/api/v1/userController/file/indexController');
 
 ///Router
 
@@ -42,6 +42,7 @@ router.use('/auth' , authRouter)
 //file 
 const fileRouter = express.Router();
 fileRouter.post('/create' , createfileValidation ,   createfileController.create.bind(createfileController) )
+fileRouter.get('/getAll' , indexFileController.index.bind(indexFileController) )
 router.use('/file' ,apiUser  ,  fileRouter);
 
 

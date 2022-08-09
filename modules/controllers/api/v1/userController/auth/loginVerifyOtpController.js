@@ -9,18 +9,17 @@ module.exports = new(class VerifyController extends InitializeController {
 
     async verifyOTP(req, res, next) {
         try {
-            const errors = validationResult(req);
-            if (!errors.isEmpty()) {
-                return this.showValidationErrors(res, errors)
-            }
+            const {number , otp } = req.body
+            if(!number || number.length !==11 )return this.abort(res , 400 , null , "number must be entered or 11 character");
+            if(!otp)return this.abort(res , 400 , null , "otp must be entered");
             const optHolder = await Otp.findOne({
-                number: req.body.number
+                number
             });
             if (optHolder.length === 0) return this.abort(res, 400, null, "You use an Expired OTP!")
             const rightOtpFind = optHolder;
-            const validUser = await bcrypt.compare(req.body.otp, rightOtpFind.otp)
-            if (rightOtpFind.number === req.body.number && validUser) {
-                let user = await this.model.User.findOne({mobile : req.body.number});
+            const validUser = await bcrypt.compare(otp, rightOtpFind.otp)
+            if (rightOtpFind.number === number && validUser) {
+                let user = await this.model.User.findOne({mobile : number});
                 if(!user) return this.abort(res , 401, null , "user does not exist")
 
                 // await this.model.User.findByIdAndUpdate(user._id, {

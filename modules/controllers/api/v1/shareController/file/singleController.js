@@ -16,9 +16,8 @@ module.exports = new(class singleController extends InitializeController {
                 return this.abort(res, null, 404, "file does not exist");
 
             const response_key = req.body["g-recaptcha-response"];
-            console.log(response_key);
+            if(!response_key) return this.abort(res, null, 400, "response key must be entered");
             let response = await this.helper.recaptcha(response_key , req.connection.remoteAddress)    
-            console.log(response);
             if(!response.data.success ){
                 return this.abort(res , null , 429 , {
                     success: false ,

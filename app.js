@@ -79,8 +79,10 @@ app.use(limiter);
 //api-v1
 const userApiV1Router = require("./modules/routes/api/user/api-v1");
 const superAdminApiV1Router = require("./modules/routes/api/admin/api-v1");
+const shareApiV1Router = require("./modules/routes/api/share/api-v1");
 app.use("/api/v1/user", userApiV1Router);
 app.use("/api/v1/admin", superAdminApiV1Router);
+app.use("/api/v1/", shareApiV1Router);
 
 
 app.use(function (err, req, res, next) {

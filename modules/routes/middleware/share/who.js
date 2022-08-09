@@ -24,7 +24,7 @@ module.exports = async (req, res) => {
       if (token.lastIp != req.connection.remoteAddress) values = { ...values, lastIp: req.connection.remoteAddress };
       await Token.findByIdAndUpdate(token._id, values).exec();
       const Transform = await transform(user, itemTransform);
-      return response(res, null, logcode, 200, Transform);
+      return response(res, null, null, 200, Transform);
     }
   } catch (err) {
     return unauthorized(res, logcode);

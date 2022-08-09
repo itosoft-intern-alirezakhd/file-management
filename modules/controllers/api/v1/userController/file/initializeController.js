@@ -5,11 +5,14 @@ const File = require(`${config.path.model}/file`);
 
 const { response } = require(`${config.path.helper}/response`);
 const { transform } = require(`${config.path.helper}/transform`);
-// const itemTransform = ["._id", ".firstName", ".lastName" , ".username" ,".mobile" , ".email", ".type"];
+const { recaptcha } = require(`${config.path.helper}/recaptcha`);
+const { index } = require(`${config.path.helper}/indexAggregate`);
+
+const itemTransform = ["._id", ".title", ".text" , ".isPrivate" , ".slug" , ".format" , ".expired" , ".user" ];
 
 module.exports = class initializeController extends Controller {
   constructor() {
     super();
-    (this.model = { File }), (this.helper = { response, transform });
+    (this.model = { File }), (this.helper = { response, transform ,  recaptcha , itemTransform , index});
   }
 };

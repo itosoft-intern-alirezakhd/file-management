@@ -1,15 +1,15 @@
 const axios = require("axios");
-const url = process.env.RECAPTCHA_URL;
-const secret = process.env.RECAPTCHA_SECRET;
-const secretTest = process.env.RECAPTCHA_SECRET_TEST;
+
 const recaptchaTest = process.env.RECAPTCHA_TEST;
-module.exports.recaptcha = async (code, ip) => {
+module.exports.recaptcha = async (response_key, ip) => {
   try {
-    let key = secretTest;
-    if (recaptchaTest == "false") key = secret;
+    const url = process.env.RECAPTCHA_URL;
+    const secret = process.env.RECAPTCHA_SECRET;
+    const secretTest = process.env.RECAPTCHA_SECRET_TEST;
+
     const config = {
-      method: "get",
-      url: `${url}${key}&response=${code}&remoteip=${ip}`,
+      method: "post",
+      url: `${url}${secretTest}&response=${response_key}&remoteip=${ip}`,
       headers: {},
     };
     const response = await axios(config);
