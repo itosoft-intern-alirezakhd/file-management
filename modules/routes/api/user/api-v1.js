@@ -2,12 +2,6 @@ const config = require("../../../config");
 const express = require("express");
 const router = express.Router();
 
-//validation 
-//auth
-const registerUserValidation = require('../../../controllers/api/v1/userController/auth/validation/register-validation');
-const loginUserValidation = require('../../../controllers/api/v1/userController/auth/validation/login-validation');
-//file
-const createfileValidation = require('../../../controllers/api/v1/userController/file/validation/create-validation')
 // middleware
 const apiUser = require(`${config.path.middleware}/user/apiUser`)
 
@@ -33,15 +27,15 @@ const indexFileController = require('../../../controllers/api/v1/userController/
 
 //auth 
 const authRouter = express.Router();
-authRouter.post('/register' , registerUserValidation , registerController.register.bind(registerController) )
-authRouter.post('/login' , loginUserValidation  , loginController.login.bind(loginController) );
+authRouter.post('/register'  , registerController.register.bind(registerController) )
+authRouter.post('/login'   , loginController.login.bind(loginController) );
 authRouter.post('/registerVerifyOtp' , registerVerifyController.verifyOTP.bind(registerVerifyController));
 authRouter.post('/loginVerifyOtp' , loginVerifyController.verifyOTP.bind(loginVerifyController));
 router.use('/auth' , authRouter)
 
 //file 
 const fileRouter = express.Router();
-fileRouter.post('/create' , createfileValidation ,   createfileController.create.bind(createfileController) )
+fileRouter.post('/create'  ,   createfileController.create.bind(createfileController) )
 fileRouter.get('/getAll' , indexFileController.index.bind(indexFileController) )
 router.use('/file' ,apiUser  ,  fileRouter);
 

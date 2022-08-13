@@ -5,8 +5,6 @@ const router = express.Router();
 const apiAdmin = require(`${config.path.middleware}/admin/apiAdmin`);
 const apiSuperAdminRegister = require(`${config.path.middleware}/admin/apiSuperAdminRegister`);
 
-//validation 
-const registerAdminValidation = require('../../../controllers/api/v1/adminController/auth/validation/register-validation')
 
 
 //  Controllers
