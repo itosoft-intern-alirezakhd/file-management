@@ -17,7 +17,4 @@ const fileRouter = express.Router();
 fileRouter.post('/getFile/:slug' , singleFileController.single.bind(singleFileController) )
 router.use("/file" , apiShare , fileRouter);
 
-
-
-
 module.exports = router;

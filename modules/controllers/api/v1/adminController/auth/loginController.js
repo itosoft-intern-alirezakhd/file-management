@@ -7,9 +7,16 @@ module.exports = new(class loginController extends InitializeController {
   async login(req, res) {
     try {
       const {username , password } = req.body;
-      let errors = validationResult(req);
-      if (!errors.isEmpty()) {
-        return this.showValidationErrors(res, errors.array())
+
+      //check validation
+      req.checkBody('username', 'username is required').notEmpty();
+      req.checkBody('password', 'Password length should be 5 to 10 characters  and not empty').notEmpty().isLength({
+        min: 5,
+        max: 10
+      });
+      let errors = req.validationErrors();
+      if (errors) {
+        return this.showValidationErrors(res, errors)
       }
       const admin = await this.model.User.findOne({
         username,

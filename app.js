@@ -75,6 +75,7 @@ app.use(helmet());
 app.use(hpp());
 app.use(mongoSanitize());
 app.use(limiter);
+app.use(expressValidator())
 
 //api-v1
 const userApiV1Router = require("./modules/routes/api/user/api-v1");

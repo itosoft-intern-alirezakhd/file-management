@@ -45,8 +45,6 @@ fileRouter.post('/create' , createfileValidation ,   createfileController.create
 fileRouter.get('/getAll' , indexFileController.index.bind(indexFileController) )
 router.use('/file' ,apiUser  ,  fileRouter);
 
-
-
 // tag
 const tagRouter = express.Router();
 tagRouter.get("/", tagIndexController.index.bind(tagIndexController));

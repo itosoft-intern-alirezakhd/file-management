@@ -7,9 +7,13 @@ module.exports = new(class loginController extends InitializeController {
   async login(req, res) {
     try {
       const {mobile } = req.body;
-      let errors = validationResult(req);
-      if (!errors.isEmpty()) {
-        return this.showValidationErrors(res, errors.array())
+      req.checkBody('mobile', 'mobile is required').notEmpty().isLength({
+        min: 11,
+        max: 11
+      });
+      let errors = req.validationErrors();
+      if (errors) {
+        return this.showValidationErrors(res, errors)
       }
       const user = await this.model.User.findOne({
         mobile

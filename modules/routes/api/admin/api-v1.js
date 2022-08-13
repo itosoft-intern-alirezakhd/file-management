@@ -59,7 +59,7 @@ router.use("/session", apiAdmin, tokenRouter);
 
 // auth
 const authRouter = express.Router();
-authRouter.post("/register" , registerAdminValidation , apiSuperAdminRegister , authRegisterController.register.bind(authRegisterController));
+authRouter.post("/register"  , apiSuperAdminRegister , authRegisterController.register.bind(authRegisterController));
 authRouter.post("/login", authLoginController.login.bind(authLoginController));
 router.use("/auth", authRouter);
 

@@ -16,9 +16,14 @@ module.exports = new(class CreateController extends initializeController {
                 expire
             } = req.body
             //check validation
-            let errors = validationResult(req);
-            if (!errors.isEmpty()) {
-                return this.showValidationErrors(res, errors.array())
+            req.checkBody('title', 'title length should not be empty and max length is 25 character').notEmpty().isLength({
+                max : 25
+            });
+            req.checkBody('text', 'text should not be empty ').notEmpty();
+
+            let errors = req.validationErrors();
+            if (errors) {
+                return this.showValidationErrors(res, errors)
             }
             let userId = req.user._id;
             //generating slug on userid
