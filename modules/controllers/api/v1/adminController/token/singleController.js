@@ -34,7 +34,7 @@ module.exports = new (class singleController extends InitializeController {
         "user.password": 0,
         "user.resetLink": 0,
       };
-      const aggregateData = [{ $match: query }, ...lookUp, { $project: project }];
+      const aggregateData = [...lookUp, { $project: project }];
       const aggregate = await this.model.Token.aggregate(aggregateData);
       let result = aggregate[0];
       if (!result) return this.abort(res, 404, logcode, null,null, "id");

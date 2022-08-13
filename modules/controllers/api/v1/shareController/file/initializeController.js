@@ -1,4 +1,4 @@
-const config = require("../../../../../../config");
+const config = require("../../../../../config");
 const Controller = require("../../../../controller");
 
 const File = require(`${config.path.model}/file`);

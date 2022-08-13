@@ -2,7 +2,6 @@ const InitializeController = require("./initializeController");
 const {
   validationResult
 } = require('express-validator/check');
-const config = require('../../../../../../config');
 
 module.exports = new(class registerController extends InitializeController {
   async register(req, res) {

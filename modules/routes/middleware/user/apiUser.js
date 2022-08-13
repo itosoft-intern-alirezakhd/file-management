@@ -1,4 +1,4 @@
-const config = require("../../../../config");
+const config = require("../../../config");
 const User = require(`${config.path.model}/user`);
 const Token = require(`${config.path.model}/token`);
 const { unauthorized } = require(`${config.path.helper}/response`);

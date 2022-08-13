@@ -17,7 +17,9 @@ module.exports = new(class loginController extends InitializeController {
       if (!user) return this.abort(res, 401, null , "user does not exist");
       
       let otp = await this.helper.otpGenerate(user.mobile)
-      // await this.helper.sendSms(user.username , user.mobile , otp);
+      let result = await this.helper.sendSms(user.username , user.mobile , otp);
+      if(!result) return this.abort(res , null , 500 ,  "error sending sms " )
+      
       // const Transform = await this.helper.transform(
       //   user,
       //   this.helper.itemTransform,
@@ -26,10 +28,10 @@ module.exports = new(class loginController extends InitializeController {
       //   req.connection.remoteAddress,
       //   req.get("User-Agent")
       // );
-      return this.helper.response(res, "login pending", null, 200, {user , number : user.mobile  , otp : otp.code});
+      return this.helper.response(res, "login pending", null, 200, {user , number : user.mobile  });
     } catch (err) {
       console.log(err);
-      return this.abort(res, 500, logcode);
+      return this.abort(res, 500, null , err);
     }
   }
 })();

@@ -25,7 +25,6 @@ module.exports = new (class indexProduct extends InitializeController {
       ///
       const queryData = [{ $match: query }];
       const aggregateData = [
-        { $match: query },
         {
           $lookup: {
             from: "tags",

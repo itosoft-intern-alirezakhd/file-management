@@ -34,10 +34,10 @@ module.exports = new(class registerController extends InitializeController {
       };
 
       const otp = await  this.helper.otpGenerate(values.mobile);
-      // await this.helper.sendSms(values.username , values.mobile , otp);
-      
+      let result = await this.helper.sendSms(values.username , values.mobile , otp);
+      if(!result) return this.abort(res , null , 500 ,  "error sending sms " )
       return this.helper.response(res , "کد فعال سازی به کاربر ارسال شد" , null , 200 , {
-        values , number  : values.mobile , otp : otp.code
+        values , number  : values.mobile 
       })
 
       // let result = await this.model.User.create(values);

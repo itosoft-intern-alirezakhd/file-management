@@ -1,4 +1,4 @@
-const config = require("../../../../config");
+const config = require("../../../config");
 const express = require("express");
 const router = express.Router();
 // middleware
@@ -6,7 +6,7 @@ const apiAdmin = require(`${config.path.middleware}/admin/apiAdmin`);
 const apiSuperAdminRegister = require(`${config.path.middleware}/admin/apiSuperAdminRegister`);
 
 //validation 
-const registerAdminValidation = require(`${config.path.validation}/admin/auth/register-validation`)
+const registerAdminValidation = require('../../../controllers/api/v1/adminController/auth/validation/register-validation')
 
 
 //  Controllers

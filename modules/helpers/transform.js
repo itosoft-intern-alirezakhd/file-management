@@ -1,6 +1,6 @@
 const expiresInUser = process.env.EXPIRESIN_USER_HOUR;
 const expiresInSuperAdmin = process.env.EXPIRESIN_SUPER_ADMIN_HOUR;
-const config = require("../../config");
+const config = require("../config");
 const { generateToken } = require(`${config.path.helper}/generateToken`);
 const TokenModel = require(`${config.path.model}/token`);
 module.exports.transform = async (result, item, withPaginate = false, type = null, ip = null, deviceName = null) => {

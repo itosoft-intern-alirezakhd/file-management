@@ -40,7 +40,7 @@ module.exports = new (class indexController extends InitializeController {
       };
       sort = { ...sort, _id: -1 };
       const queryData = [{ $match: query }];
-      const aggregateData = [{ $match: query }, ...lookUp, { $project: project }];
+      const aggregateData = [ ...lookUp, { $project: project }];
       const result = await this.helper.index(req, "token", queryData, aggregateData, sort);
       if (!result) return this.abort(res, 500, logcode);
       const Transform = await this.helper.transform(result, this.helper.itemTransform, true);

@@ -1,13 +1,13 @@
-const config = require("../../../../config");
+const config = require("../../../config");
 const express = require("express");
 const router = express.Router();
 
 //validation 
 //auth
-const registerUserValidation = require(`${config.path.validation}/user/auth/register-validation`);
-const loginUserValidation = require(`${config.path.validation}/user/auth/login-validation`);
+const registerUserValidation = require('../../../controllers/api/v1/userController/auth/validation/register-validation');
+const loginUserValidation = require('../../../controllers/api/v1/userController/auth/validation/login-validation');
 //file
-const createfileValidation = require(`${config.path.validation}/user/file/create-validation`)
+const createfileValidation = require('../../../controllers/api/v1/userController/file/validation/create-validation')
 // middleware
 const apiUser = require(`${config.path.middleware}/user/apiUser`)
 
