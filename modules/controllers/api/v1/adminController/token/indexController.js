@@ -42,12 +42,12 @@ module.exports = new (class indexController extends InitializeController {
       const queryData = [{ $match: query }];
       const aggregateData = [ ...lookUp, { $project: project }];
       const result = await this.helper.index(req, "token", queryData, aggregateData, sort);
-      if (!result) return this.abort(res, 500, logcode);
+      if (!result) return this.abort(res, 500, null);
       const Transform = await this.helper.transform(result, this.helper.itemTransform, true);
-      return this.helper.response(res, null, logcode, 200, Transform);
+      return this.helper.response(res, null, null, 200, Transform);
     } catch (err) {
       console.log(err);
-      return this.abort(res, 500, logcode);
+      return this.abort(res, 500, null);
     }
   }
 })();

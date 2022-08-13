@@ -37,12 +37,12 @@ module.exports = new (class singleController extends InitializeController {
       const aggregateData = [...lookUp, { $project: project }];
       const aggregate = await this.model.Token.aggregate(aggregateData);
       let result = aggregate[0];
-      if (!result) return this.abort(res, 404, logcode, null,null, "id");
+      if (!result) return this.abort(res, 404, null, null,null, "id");
       const Transform = await this.helper.transform(result, this.helper.itemTransform);
-      return this.helper.response(res, null, logcode, 200, Transform);
+      return this.helper.response(res, null, null, 200, Transform);
     } catch (err) {
       console.log(err);
-      return this.abort(res, 500, logcode);
+      return this.abort(res, 500, null);
     }
   }
 })();
